@@ -12,10 +12,12 @@ export default function ListingPage() {
   const { setCurrentStep } = useListingStore();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col">
       <Header />
       
-      <div className="max-w-4xl mx-auto px-6 py-24">
+      {/* Main content area with proper spacing for fixed header and footer */}
+      <div className="flex-1 pt-20 pb-20 overflow-y-auto">
+        <div className="max-w-4xl mx-auto px-6 py-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome back, Sam</h1>
         
         {/* Complete Existing Listing */}
@@ -61,22 +63,28 @@ export default function ListingPage() {
           </Card>
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center h-16 px-6 bg-white border-t border-gray-200 fixed bottom-0 left-56 right-56">
-          <Button onClick={() => {              
-              router.push('/login');
-            }} variant="outline" size="lg">            
-            Exit
-          </Button>
-          <Button 
-            onClick={() => {
-              setCurrentStep('property-type');
-              router.push('/listing/property-type');
-            }}
-            size="lg"
-          >
-            Next
-          </Button>
+        </div>
+      </div>
+      
+      {/* Fixed Navigation Footer */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <Button onClick={() => {              
+                router.push('/login');
+              }} variant="outline" size="lg">            
+              Exit
+            </Button>
+            <Button 
+              onClick={() => {
+                setCurrentStep('property-type');
+                router.push('/listing/property-type');
+              }}
+              size="lg"
+            >
+              Next
+            </Button>
+          </div>
         </div>
       </div>
     </div>
