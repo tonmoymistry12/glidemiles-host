@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
+import { Header } from '@/components/layout/Header';
+import { FormSection } from '@/components/listing/FormSection';
 import { Alert } from '@/components/ui/Alert';
 import { useListingStore } from '@/store/listingStore';
-import {RealEstateAgent as RealEstateAgentIcon} from '@mui/icons-material';
+import styles from '../shared.module.scss';
 
 export default function PropertyDetailsPage() {
   const router = useRouter();
@@ -70,29 +71,31 @@ export default function PropertyDetailsPage() {
   };
 
   return (
-    <div className="flex-1 p-8 bg-gray-50">
-      <div className="max-w-sm md:max-w-lg lg:max-w-3xl">
-        <div className="flex items-start justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Property details</h1>
-            <p className="text-gray-600">
-              Set your key policies and list your facilities so your guests know what to expect and 
-              enjoy during their stay.
-            </p>
-          </div>
-          <div className="ml-8">
-            <div className="w-24 h-24 bg-red-100 rounded-lg flex items-center justify-center">
-              {/* <span className="text-4xl">🛋️</span> */}
-              <RealEstateAgentIcon sx={{ color: '#E91E63', fontSize: 44 }} />
-            </div>
-          </div>
+    <div className={styles.container}>
+      <Header />
+      
+      {/* Fixed Header */}
+      <div className={styles.fixedHeader}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>
+            Property details
+          </h1>
+          <p className={styles.subtitle}>Set your key policies and list your facilities so your guests know what to expect</p>
         </div>
+      </div>
+      
+      {/* Content Area with Fixed Height */}
+      <div className={styles.contentArea}>
+        <div className={styles.contentWrapper}>
+          {/* Scrollable Content Container */}
+          <div className={styles.scrollableContainer}>
 
-        {/* Cancellation Policy */}
-        <div className="bg-white rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-4">Cancellation policy</h3>
-          
-          <div className="space-y-4 mb-4">
+            {/* Cancellation Policy */}
+            <FormSection
+              title="Cancellation policy"
+              description="Choose your cancellation policy for guests"
+            >
+              <div className="space-y-4 mb-4">
             <label className="flex items-start space-x-3 cursor-pointer">
               <input
                 type="radio"
@@ -147,267 +150,298 @@ export default function PropertyDetailsPage() {
                 </p>
               </div>
             </label>
-          </div>
-
-          <Alert variant="info" className="mb-6">
-            Tip: Don&apos;t worry, you can change your cancellation policy even after onboarding.
-          </Alert>
-        </div>
-
-        {/* Check-in/Check-out Time */}
-        <div className="bg-white rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-4">Check-in/check-out time</h3>
-          
-          <div className="grid grid-cols-2 gap-6 mb-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">When can guests check in?</label>
-              <p className="text-sm text-gray-600 mb-3">Between</p>
-              <div className="space-y-2">
-                <select
-                  value={propertyData.checkIn?.from || '3pm'}
-                  onChange={(e) => handleCheckInChange('from', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="3pm">3pm</option>
-                  <option value="2pm">2pm</option>
-                  <option value="4pm">4pm</option>
-                </select>
-                <p className="text-sm text-gray-600">and</p>
-                <select
-                  value={propertyData.checkIn?.to || '6pm'}
-                  onChange={(e) => handleCheckInChange('to', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="6pm">6pm</option>
-                  <option value="8pm">8pm</option>
-                  <option value="10pm">10pm</option>
-                </select>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">What time will guests have to check out by?</label>
-              <select
-                value={propertyData.checkOut || '11am'}
-                onChange={(e) => handleCheckOutChange(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="11am">11am</option>
-                <option value="10am">10am</option>
-                <option value="12pm">12pm</option>
-              </select>
-            </div>
+              <Alert variant="info" className="mb-6">
+                Tip: Don&apos;t worry, you can change your cancellation policy even after onboarding.
+              </Alert>
+            </FormSection>
+
+            {/* Check-in/Check-out Time */}
+            <FormSection
+              title="Check-in/check-out time"
+              description="Set the times when guests can check in and out"
+            >
+              <div className="space-y-6">
+                {/* Check-in Time */}
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <label className="block text-sm font-semibold text-gray-900 mb-3">
+                    Check-in Time
+                  </label>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm text-gray-600 whitespace-nowrap">Between</span>
+                    <select
+                      value={propertyData.checkIn?.from || '3pm'}
+                      onChange={(e) => handleCheckInChange('from', e.target.value)}
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                    >
+                      <option value="2pm">2:00 PM</option>
+                      <option value="3pm">3:00 PM</option>
+                      <option value="4pm">4:00 PM</option>
+                      <option value="5pm">5:00 PM</option>
+                    </select>
+                    <span className="text-sm text-gray-600 whitespace-nowrap">and</span>
+                    <select
+                      value={propertyData.checkIn?.to || '6pm'}
+                      onChange={(e) => handleCheckInChange('to', e.target.value)}
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                    >
+                      <option value="6pm">6:00 PM</option>
+                      <option value="7pm">7:00 PM</option>
+                      <option value="8pm">8:00 PM</option>
+                      <option value="9pm">9:00 PM</option>
+                      <option value="10pm">10:00 PM</option>
+                    </select>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Guests can check in anytime during this window
+                  </p>
+                </div>
+
+                {/* Check-out Time */}
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <label className="block text-sm font-semibold text-gray-900 mb-3">
+                    Check-out Time
+                  </label>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm text-gray-600 whitespace-nowrap">By</span>
+                    <select
+                      value={propertyData.checkOut || '11am'}
+                      onChange={(e) => handleCheckOutChange(e.target.value)}
+                      className="w-32 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                    >
+                      <option value="10am">10:00 AM</option>
+                      <option value="11am">11:00 AM</option>
+                      <option value="12pm">12:00 PM</option>
+                      <option value="1pm">1:00 PM</option>
+                      <option value="2pm">2:00 PM</option>
+                    </select>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Guests must check out by this time
+                  </p>
+                </div>
+              </div>
+            </FormSection>
+
+            {/* Access */}
+            <FormSection
+              title="Access"
+              description="How guests get into your property"
+            >
+              <div className="grid grid-cols-3 gap-4">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.checkinout || false}
+                    onChange={(e) => handleAccessChange('checkinout', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Check-in/out (private)</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.keyless || false}
+                    onChange={(e) => handleAccessChange('keyless', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Keyless access</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.frontDesk || true}
+                    onChange={(e) => handleAccessChange('frontDesk', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Front desk (24-hour)</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.checkin24 || true}
+                    onChange={(e) => handleAccessChange('checkin24', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Check-in (24-hour)</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.parking || false}
+                    onChange={(e) => handleAccessChange('parking', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Car park</span>
+                </label>
+              </div>
+            </FormSection>
+
+            {/* Important Information */}
+            <FormSection
+              title="Important information"
+              description="These offerings are found in most of our successful properties"
+            >
+              <div className="grid grid-cols-3 gap-4">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.ac || true}
+                    onChange={(e) => handleAmenityChange('ac', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">A/C</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.pets || false}
+                    onChange={(e) => handleAmenityChange('pets', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Pets allowed</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.transport || false}
+                    onChange={(e) => handleAmenityChange('transport', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Transport to airport</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.wifi || false}
+                    onChange={(e) => handleAmenityChange('wifi', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Complimentary WiFi in all rooms</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.breakfast || false}
+                    onChange={(e) => handleAmenityChange('breakfast', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Breakfast (free)</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.kitchen || true}
+                    onChange={(e) => handleAmenityChange('kitchen', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Shared kitchen</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.cleaning || true}
+                    onChange={(e) => handleAmenityChange('cleaning', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Daily cleaning</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.amenities?.laundry || false}
+                    onChange={(e) => handleAmenityChange('laundry', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Laundry service</span>
+                </label>
+              </div>
+            </FormSection>
+
+            {/* Payment Information */}
+            <FormSection
+              title="Payment information"
+              description="Guests may choose to pay at your property, make sure to let travelers know what you accept"
+            >
+              <div className="grid grid-cols-3 gap-4">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.paymentMethods?.visa || false}
+                    onChange={(e) => handlePaymentMethodChange('visa', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Visa</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.paymentMethods?.mastercard || true}
+                    onChange={(e) => handlePaymentMethodChange('mastercard', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">MasterCard</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.paymentMethods?.amex || false}
+                    onChange={(e) => handlePaymentMethodChange('amex', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">American Express</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.paymentMethods?.cash || false}
+                    onChange={(e) => handlePaymentMethodChange('cash', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">Cash</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.paymentMethods?.unionpay || true}
+                    onChange={(e) => handlePaymentMethodChange('unionpay', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">UnionPay</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={propertyData.paymentMethods?.jcb || false}
+                    onChange={(e) => handlePaymentMethodChange('jcb', e.target.checked)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">JCB</span>
+                </label>
+              </div>
+            </FormSection>
           </div>
         </div>
-
-        {/* Access */}
-        <div className="bg-white rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-2">Access</h3>
-          <p className="text-gray-600 mb-4">How guests get into your property.</p>
-          
-          <div className="grid grid-cols-3 gap-4">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.checkinout || false}
-                onChange={(e) => handleAccessChange('checkinout', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Check-in/out (private)</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.keyless || false}
-                onChange={(e) => handleAccessChange('keyless', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Keyless access</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.frontDesk || true}
-                onChange={(e) => handleAccessChange('frontDesk', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Front desk (24-hour)</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.checkin24 || true}
-                onChange={(e) => handleAccessChange('checkin24', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Check-in (24-hour)</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.parking || false}
-                onChange={(e) => handleAccessChange('parking', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Car park</span>
-            </label>
+      </div>
+      
+      {/* Fixed Navigation Footer */}
+      <div className={styles.fixedFooter}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerButtons}>
+            <button 
+              onClick={handlePrevious}
+              className={`${styles.button} ${styles.secondary}`}
+            >
+              Back
+            </button>
+            <button 
+              onClick={handleNext}
+              className={`${styles.button} ${styles.primary}`}
+            >
+              Next
+            </button>
           </div>
-        </div>
-
-        {/* Important Information */}
-        <div className="bg-white rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-2">Important information</h3>
-          <p className="text-gray-600 mb-4">These offerings are found in most of our successful properties</p>
-          
-          <div className="grid grid-cols-3 gap-4">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.ac || true}
-                onChange={(e) => handleAmenityChange('ac', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">A/C</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.pets || false}
-                onChange={(e) => handleAmenityChange('pets', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Pets allowed</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.transport || false}
-                onChange={(e) => handleAmenityChange('transport', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Transport to airport</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.wifi || false}
-                onChange={(e) => handleAmenityChange('wifi', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Complimentary WiFi in all rooms</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.breakfast || false}
-                onChange={(e) => handleAmenityChange('breakfast', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Breakfast (free)</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.kitchen || true}
-                onChange={(e) => handleAmenityChange('kitchen', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Shared kitchen</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.cleaning || true}
-                onChange={(e) => handleAmenityChange('cleaning', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Daily cleaning</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.amenities?.laundry || false}
-                onChange={(e) => handleAmenityChange('laundry', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Laundry service</span>
-            </label>
-          </div>
-        </div>
-
-        {/* Payment Information */}
-        <div className="bg-white rounded-lg p-6 mb-8">
-          <h3 className="text-lg font-semibold mb-2">Payment information</h3>
-          <p className="text-gray-600 mb-4">
-            Guests may choose to pay at your property, make sure to let travelers know what you accept
-          </p>
-          
-          <div className="grid grid-cols-3 gap-4">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.paymentMethods?.visa || false}
-                onChange={(e) => handlePaymentMethodChange('visa', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Visa</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.paymentMethods?.mastercard || true}
-                onChange={(e) => handlePaymentMethodChange('mastercard', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">MasterCard</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.paymentMethods?.amex || false}
-                onChange={(e) => handlePaymentMethodChange('amex', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">American Express</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.paymentMethods?.cash || false}
-                onChange={(e) => handlePaymentMethodChange('cash', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">Cash</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.paymentMethods?.unionpay || true}
-                onChange={(e) => handlePaymentMethodChange('unionpay', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">UnionPay</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={propertyData.paymentMethods?.jcb || false}
-                onChange={(e) => handlePaymentMethodChange('jcb', e.target.checked)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-sm">JCB</span>
-            </label>
-          </div>
-        </div>
-
-        {/* Navigation */}
-        <div className="flex justify-between">
-          <Button variant="outline" size="lg" onClick={handlePrevious}>
-            PREVIOUS
-          </Button>
-          <Button size="lg" onClick={handleNext}>
-            NEXT
-          </Button>
         </div>
       </div>
     </div>

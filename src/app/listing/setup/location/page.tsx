@@ -3,10 +3,12 @@ import React, { useState, useCallback, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, MapPin } from 'lucide-react';
 import { GoogleMap, LoadScript, Marker, Autocomplete } from '@react-google-maps/api';
-import { Button } from '@/components/ui/Button';
-import { Select } from '@/components/ui/Select';
+import { Header } from '@/components/layout/Header';
+import { FormSection } from '@/components/listing/FormSection';
 import { Input } from '@/components/ui/Input';
+import { Select } from '@/components/ui/Select';
 import { useListingStore } from '@/store/listingStore';
+import styles from '../shared.module.scss';
 
 // Google Maps configuration
 const libraries: ("places" | "geometry" | "drawing" | "visualization")[] = ["places"];
@@ -308,131 +310,161 @@ export default function LocationPage() {
   ];
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <div className="max-w-sm md:max-w-lg lg:max-w-3xl">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">
-          Where is your property located?
-        </h1>
-        
-        {/* Search Input with Google Places Autocomplete */}
-        <div className="bg-white rounded-lg p-6 mb-6">
-          <LoadScript
-            googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
-            libraries={libraries}
-          >
-            <div className="relative mb-6">
-              <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400 z-10" />
-              <Autocomplete
-                onLoad={onAutocompleteLoad}
-                onPlaceChanged={onPlaceChanged}
-              >
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  placeholder="Search for your property location"
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </Autocomplete>
-            </div>
-          </LoadScript>
-          <p className="text-sm text-gray-500">Enter a location</p>
+    <div className={styles.container}>
+      <Header />
+      
+      {/* Fixed Header */}
+      <div className={styles.fixedHeader}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>
+            Where is your property located?
+          </h1>
+          <p className={styles.subtitle}>Help guests find your property easily</p>
         </div>
-
-        {/* Property Location Form */}
-        <div className="bg-white rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-4">Property location</h3>
-          
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <Select
-              label="Country/Region"
-              options={countryOptions}
-              value={propertyData.location?.country || ''}
-              onChange={(e) => handleLocationChange('country', e.target.value)}
-            />
-            <Select
-              label="State/Province"
-              options={stateOptions}
-              value={propertyData.location?.state || ''}
-              onChange={(e) => handleLocationChange('state', e.target.value)}
-            />
-          </div>
-          
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <Select
-              label="City"
-              options={cityOptions}
-              value={propertyData.location?.city || ''}
-              onChange={(e) => handleLocationChange('city', e.target.value)}
-            />
-            <Input
-              label="Street address"
-              value={propertyData.location?.address || ''}
-              onChange={(e) => handleLocationChange('address', e.target.value)}
-              placeholder=", Pandua"
-            />
-          </div>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              label="Building, floor or unit number (optional)"
-              value={propertyData.location?.building || ''}
-              onChange={(e) => handleLocationChange('building', e.target.value)}
-            />
-            <Input
-              label="ZIP/Postal code (optional)"
-              value={propertyData.location?.postalCode || ''}
-              onChange={(e) => handleLocationChange('postalCode', e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* Google Map */}
-        <div className="bg-white rounded-lg p-6 mb-6">
-          <LoadScript
-            googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
-            libraries={libraries}
-          >
-            <GoogleMap
-              mapContainerStyle={mapContainerStyle}
-              center={center}
-              zoom={13}
-              onLoad={onMapLoad}
-              onClick={onMapClick}
-              options={mapOptions}
+      </div>
+      
+      {/* Content Area with Fixed Height */}
+      <div className={styles.contentArea}>
+        <div className={styles.contentWrapper}>
+          {/* Scrollable Content Container */}
+          <div className={styles.scrollableContainer}>
+            {/* Search Input with Google Places Autocomplete */}
+            <FormSection
+              title="Search Location"
+              description="Enter a location to find your property on the map"
             >
-              {marker && (
-                <Marker
-                  position={marker}
-                  draggable={true}
-                  onDragEnd={(e) => {
-                    if (e.latLng) {
-                      setMarker(e.latLng);
-                      reverseGeocode(e.latLng);
-                    }
-                  }}
+              <LoadScript
+                googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
+                libraries={libraries}
+              >
+                <div className="relative mb-6">
+                  <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400 z-10" />
+                  <Autocomplete
+                    onLoad={onAutocompleteLoad}
+                    onPlaceChanged={onPlaceChanged}
+                  >
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      placeholder="Search for your property location"
+                      value={searchValue}
+                      onChange={(e) => setSearchValue(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </Autocomplete>
+                </div>
+              </LoadScript>
+            </FormSection>
+
+            {/* Property Location Form */}
+            <FormSection
+              title="Property Location"
+              description="Complete the address details for your property"
+            >
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <Select
+                  label="Country/Region"
+                  options={countryOptions}
+                  value={propertyData.location?.country || ''}
+                  onChange={(e) => handleLocationChange('country', e.target.value)}
                 />
-              )}
-            </GoogleMap>
-          </LoadScript>
-          
-          <div className="flex items-center mt-4 space-x-2">
-            <MapPin className="w-4 h-4 text-blue-600" />
-            <p className="text-sm text-gray-600">
-              Is this the correct location of your property? If not, click on the map or drag the pin to the correct location.
-            </p>
+                <Select
+                  label="State/Province"
+                  options={stateOptions}
+                  value={propertyData.location?.state || ''}
+                  onChange={(e) => handleLocationChange('state', e.target.value)}
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <Select
+                  label="City"
+                  options={cityOptions}
+                  value={propertyData.location?.city || ''}
+                  onChange={(e) => handleLocationChange('city', e.target.value)}
+                />
+                <Input
+                  label="Street address"
+                  value={propertyData.location?.address || ''}
+                  onChange={(e) => handleLocationChange('address', e.target.value)}
+                  placeholder=", Pandua"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  label="Building, floor or unit number (optional)"
+                  value={propertyData.location?.building || ''}
+                  onChange={(e) => handleLocationChange('building', e.target.value)}
+                />
+                <Input
+                  label="ZIP/Postal code (optional)"
+                  value={propertyData.location?.postalCode || ''}
+                  onChange={(e) => handleLocationChange('postalCode', e.target.value)}
+                />
+              </div>
+            </FormSection>
+
+            {/* Google Map */}
+            <FormSection
+              title="Map Location"
+              description="Verify the location on the map"
+            >
+              <LoadScript
+                googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
+                libraries={libraries}
+              >
+                <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  center={center}
+                  zoom={13}
+                  onLoad={onMapLoad}
+                  onClick={onMapClick}
+                  options={mapOptions}
+                >
+                  {marker && (
+                    <Marker
+                      position={marker}
+                      draggable={true}
+                      onDragEnd={(e) => {
+                        if (e.latLng) {
+                          setMarker(e.latLng);
+                          reverseGeocode(e.latLng);
+                        }
+                      }}
+                    />
+                  )}
+                </GoogleMap>
+              </LoadScript>
+              
+              <div className="flex items-center mt-4 space-x-2">
+                <MapPin className="w-4 h-4 text-blue-600" />
+                <p className="text-sm text-gray-600">
+                  Is this the correct location of your property? If not, click on the map or drag the pin to the correct location.
+                </p>
+              </div>
+            </FormSection>
           </div>
         </div>
-
-        {/* Navigation */}
-        <div className="flex justify-between">
-          <Button variant="outline" size="lg" onClick={handlePrevious}>
-            PREVIOUS
-          </Button>
-          <Button size="lg" onClick={handleNext}>
-            NEXT
-          </Button>
+      </div>
+      
+      {/* Fixed Navigation Footer */}
+      <div className={styles.fixedFooter}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerButtons}>
+            <button 
+              onClick={handlePrevious}
+              className={`${styles.button} ${styles.secondary}`}
+            >
+              Back
+            </button>
+            <button 
+              onClick={handleNext}
+              className={`${styles.button} ${styles.primary}`}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

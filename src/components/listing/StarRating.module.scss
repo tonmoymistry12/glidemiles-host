@@ -1,0 +1,25 @@
+.starRating {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.star {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.filled {
+    color: #fbbf24;
+    fill: currentColor;
+  }
+
+  &.empty {
+    color: #d1d5db;
+
+    &:hover {
+      color: #fbbf24;
+    }
+  }
+}

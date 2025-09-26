@@ -3,10 +3,10 @@ import React, { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { SubtypeCard } from '@/components/listing/SubtypeCard';
-import { Button } from '@/components/ui/Button';
 import { useListingStore } from '@/store/listingStore';
 import { PropertyTypeSuggestionModal } from '@/components/modals/PropertyTypeSuggestionModal';
 import { HOME_SUBTYPES, HOTEL_SUBTYPES, UNIQUE_SUBTYPES } from '@/lib/constants';
+import styles from './page.module.scss';
 
 function SubtypePageContent() {
   const router = useRouter();
@@ -63,74 +63,96 @@ function SubtypePageContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={styles.container}>
       <Header />
       
-      <div className="max-w-4xl mx-auto px-6 py-24">
-        <h1 className="text-2xl font-bold text-gray-900 mb-8">
-          {subtypeData.title}
-        </h1>
-        
-        {/* Most Common Types */}
-        <div className="mb-8">
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">
-            Most common {propertyData.propertyType}-type property
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-            {subtypeData.mostCommon?.map((subtype) => (
-              <SubtypeCard
-                key={subtype.id}
-                subtype={subtype}
-                selected={propertyData.subType === subtype.id}
-                onClick={() => handleSubtypeSelection(subtype.id)}
-              />
-            ))}
+      {/* Fixed Header */}
+      <div className={styles.fixedHeader}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>
+            {subtypeData.title}
+          </h1>
+          {/* Help Link - Top Right */}
+          <div className={styles.helpLinkTopRight}>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
+              className={styles.helpLink}
+            >
+              I don&apos;t see my property type on the list
+            </a>
           </div>
-
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">
-            Others {propertyData.propertyType}-type property
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {subtypeData.others?.map((subtype) => (
-              <SubtypeCard
-                key={subtype.id}
-                subtype={subtype}
-                selected={propertyData.subType === subtype.id}
-                onClick={() => handleSubtypeSelection(subtype.id)}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Help Link */}
-      <div className="text-center mb-8">
-        <a 
-          href="#" 
-          onClick={(e) => {
-            e.preventDefault();
-            setIsModalOpen(true);
-          }}
-          className="text-blue-600 hover:underline text-sm"
-        >
-          I don&apos;t see my property type on the list
-        </a>
-      </div>     
-    
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center h-16 px-6 bg-white border-t border-gray-200 fixed bottom-0 left-56 right-56">
-          <Button variant="outline" size="lg" onClick={handleBack}>
-            Back
-          </Button>
-          <Button 
-            size="lg"
-            onClick={handleNext}
-            disabled={!propertyData.subType}
-          >
-            Next
-          </Button>
         </div>
       </div>
+      
+      {/* Content Area with Fixed Height */}
+      <div className={styles.contentArea}>
+        <div className={styles.contentWrapper}>
+          {/* Scrollable Content Container */}
+          <div className={styles.scrollableContainer}>
+            {/* Most Common Types */}
+            <div className="mb-8">
+              <h3 className={styles.sectionTitle}>
+                Most common {propertyData.propertyType}-type property
+              </h3>
+              <div className={styles.gridContainer}>
+                {subtypeData.mostCommon?.map((subtype) => (
+                  <SubtypeCard
+                    key={subtype.id}
+                    subtype={subtype}
+                    selected={propertyData.subType === subtype.id}
+                    onClick={() => handleSubtypeSelection(subtype.id)}
+                  />
+                ))}
+              </div>
+
+              <h3 className={styles.sectionTitle}>
+                Others {propertyData.propertyType}-type property
+              </h3>
+              <div className={styles.gridContainer}>
+                {subtypeData.others?.map((subtype) => (
+                  <SubtypeCard
+                    key={subtype.id}
+                    subtype={subtype}
+                    selected={propertyData.subType === subtype.id}
+                    onClick={() => handleSubtypeSelection(subtype.id)}
+                  />
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+      {/* Fixed Navigation Footer */}
+      <div className={styles.fixedFooter}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerButtons}>
+            <button 
+              onClick={handleBack}
+              className="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium"
+            >
+              Back
+            </button>
+            <button 
+              onClick={handleNext}
+              disabled={!propertyData.subType}
+              className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+                propertyData.subType
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                  : 'bg-slate-300 cursor-not-allowed text-slate-500'
+              }`}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+      
       {/* Modal */}
       <PropertyTypeSuggestionModal
         isOpen={isModalOpen}

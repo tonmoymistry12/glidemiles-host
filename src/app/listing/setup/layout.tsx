@@ -21,15 +21,13 @@ export default function SetupLayout({
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      <div className="flex pt-16">
-        <StepIndicator 
-          steps={steps}
-          currentStep={steps.find(s => s.current)?.id || 'basics'}
-          onStepClick={handleStepClick}
-        />
-        <div className="flex-1 ml-[25rem]">
-          {children}
-        </div>
+      <StepIndicator 
+        steps={steps}
+        currentStep={steps.find(s => s.current)?.id || 'basics'}
+        onStepClick={handleStepClick}
+      />
+      <div className="ml-64">
+        {children}
       </div>
     </div>
   );
