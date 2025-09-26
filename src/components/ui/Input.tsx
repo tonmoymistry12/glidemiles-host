@@ -28,6 +28,7 @@ export const Input: React.FC<InputProps> = ({
           error && 'border-red-300 focus:ring-red-500',
           className
         )}
+        suppressHydrationWarning
         {...props}
       />
       {helper && !error && (

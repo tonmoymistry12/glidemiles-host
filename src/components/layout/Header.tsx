@@ -59,10 +59,16 @@ export const Header: React.FC<HeaderProps> = ({
             {!showNavigation && !showUserInfo && (
               <>
                 <span className="text-gray-600 text-sm">Not an Glidemiles Partner?</span>
-                <button className="px-4 py-2 border border-blue-600 text-blue-600 rounded text-sm font-medium hover:bg-blue-50 transition-colors">
+                <button 
+                  className="px-4 py-2 border border-blue-600 text-blue-600 rounded text-sm font-medium hover:bg-blue-50 transition-colors"
+                  suppressHydrationWarning
+                >
                   SIGN UP!
                 </button>
-                <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                <button 
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  suppressHydrationWarning
+                >
                   Contact us
                 </button>
               </>
