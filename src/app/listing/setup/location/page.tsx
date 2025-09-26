@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, MapPin } from 'lucide-react';
 import { GoogleMap, LoadScript, Marker, Autocomplete } from '@react-google-maps/api';
@@ -94,8 +94,8 @@ export default function LocationPage() {
   }, [map, updatePropertyData, propertyData.location]);
 
   // Debounce geocoding to avoid too many API calls
-  const debounceGeocode = useCallback(
-    debounce(geocodeAddress, 1000),
+  const debounceGeocode = useMemo(
+    () => debounce(geocodeAddress, 1000),
     [geocodeAddress]
   );
 
