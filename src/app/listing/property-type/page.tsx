@@ -2,7 +2,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
-import { PropertyTypeCard } from '@/components/listing/PropertyTypeCard';
 import { Button } from '@/components/ui/Button';
 import { useListingStore } from '@/store/listingStore';
 import { PROPERTY_TYPES } from '@/lib/constants';

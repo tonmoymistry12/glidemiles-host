@@ -79,7 +79,7 @@ export default function OTPPage() {
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-1">Verify Your Email</h2>
             <p className="text-gray-600 text-sm">
-              We've sent a 6-digit code to
+              We&apos;ve sent a 6-digit code to
             </p>
             <p className="text-blue-600 font-semibold mt-1">
               {propertyData.email}
@@ -118,7 +118,7 @@ export default function OTPPage() {
           {/* Actions */}
           <div className="text-center space-y-3">
             <div className="flex items-center justify-center space-x-2">
-              <span className="text-sm text-gray-500">Didn't receive the code?</span>
+              <span className="text-sm text-gray-500">Didn&apos;t receive the code?</span>
               <button 
                 onClick={handleResend}
                 disabled={!canResend}
@@ -146,7 +146,7 @@ export default function OTPPage() {
           {/* Help */}
           <div className="flex items-center justify-center mt-4 p-2 bg-gray-50 rounded-lg">
             <Info className="w-3 h-3 text-gray-500 mr-2" />
-            <span className="text-xs text-gray-600">Check your spam folder if you don't see the email</span>
+            <span className="text-xs text-gray-600">Check your spam folder if you don&apos;t see the email</span>
           </div>
 
           <div className="mt-4 pt-4 border-t border-gray-100">

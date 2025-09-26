@@ -95,10 +95,8 @@ export default function LocationPage() {
 
   // Debounce geocoding to avoid too many API calls
   const debounceGeocode = useCallback(
-    debounce(() => {
-      geocodeAddress();
-    }, 1000),
-    [propertyData.location, map, updatePropertyData, geocodeAddress]
+    debounce(geocodeAddress, 1000),
+    [geocodeAddress]
   );
 
   const handleLocationChange = (field: string, value: string) => {
