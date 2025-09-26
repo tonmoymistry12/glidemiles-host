@@ -1,0 +1,460 @@
+.container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.leftCard {
+  background: linear-gradient(to bottom right, #3b82f6, #1d4ed8);
+  border-radius: 1rem 0 0 1rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 600px;
+}
+
+.logoSection {
+  margin-bottom: 2rem;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logoRed {
+  background-color: #ef4444;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.logoImage {
+  height: 3rem;
+  width: auto;
+}
+
+.tagline {
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.featureIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.featureIconSvg {
+  width: 1.375rem;
+  height: 1.375rem;
+  color: white;
+}
+
+.featureContent {
+  flex: 1;
+}
+
+.featureTitle {
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.featureDescription {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.testimonial {
+  margin-top: 2rem;
+}
+
+.testimonialQuote {
+  color: rgba(255, 255, 255, 0.95);
+  font-style: italic;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.testimonialAuthor {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.testimonialDots {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+}
+
+.dotActive {
+  background-color: white;
+}
+
+.dotInactive {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.bottomText {
+  margin-top: 2rem;
+}
+
+.bottomTextContent {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.rightCard {
+  background-color: white;
+  border-radius: 0 1rem 1rem 0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.closeButtonInner {
+  width: 2rem;
+  height: 2rem;
+  background-color: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: #e5e7eb;
+  }
+}
+
+.closeIcon {
+  width: 1rem;
+  height: 1rem;
+  color: #6b7280;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.headerIconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.userIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  background-color: #e6f2ff;
+}
+
+.userIconSvg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #2b7fff;
+}
+
+.headerTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.headerSubtitle {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.inputIconSvg {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #9ca3af;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.2s;
+  
+  &:focus {
+    border-color: #2b7fff;
+    box-shadow: 0 0 0 2px rgba(43, 127, 255, 0.2);
+  }
+}
+
+.passwordInput {
+  padding-right: 3rem;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  
+  &:hover {
+    color: #6b7280;
+  }
+}
+
+.passwordToggleIcon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.forgotPassword {
+  text-align: right;
+}
+
+.forgotPasswordLink {
+  font-size: 0.875rem;
+  color: #2563eb;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submitButton {
+  width: 100%;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  transform: scale(1);
+  background-color: #2b7fff;
+  
+  &:hover {
+    background-color: #1e5bb8;
+    transform: scale(1.05);
+  }
+}
+
+.orSeparator {
+  margin-top: 1.5rem;
+}
+
+.orSeparatorInner {
+  position: relative;
+}
+
+.orSeparatorLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '';
+    width: 100%;
+    border-top: 1px solid #d1d5db;
+  }
+}
+
+.orSeparatorText {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+.orSeparatorSpan {
+  padding: 0 0.5rem;
+  background-color: white;
+  color: #6b7280;
+}
+
+.googleButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  background-color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: #f9fafb;
+  }
+  
+  &:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #2b7fff;
+    ring-offset: 2px;
+  }
+}
+
+.googleIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+}
+
+.laptopIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+.googleButtonText {
+  margin-right: 0.5rem;
+}
+
+.googleButtonArrow {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.googleEmail {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.bottomLinks {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.bottomLinksText {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.bottomLinksButton {
+  color: #2563eb;
+  font-weight: 500;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
