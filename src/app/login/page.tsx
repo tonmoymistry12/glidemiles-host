@@ -26,15 +26,57 @@ export default function LoginPage() {
       <Header />
       
       <div className="flex-1 flex items-center justify-center px-4">
-        <div className="w-full max-w-sm mx-auto">
+        <div className="w-full max-w-md mx-auto">
+          {/* Benefits Section */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-3">
+              Welcome to Glidemiles Partner
+            </h1>
+            <p className="text-lg text-gray-600 mb-6">
+              Your gateway to maximizing property revenue
+            </p>
+            
+            <div className="bg-white rounded-lg shadow-sm p-6 mb-6 border border-gray-100">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Why Partner with Glidemiles?
+              </h3>
+              <div className="space-y-3 text-left">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-medium">Increase Bookings:</span> Reach millions of travelers worldwide
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-medium">Boost Revenue:</span> Competitive commission rates and instant payouts
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-medium">Easy Management:</span> Complete dashboard to manage bookings and analytics
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-medium">24/7 Support:</span> Dedicated partner support team
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         {/* Login Form */}
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-1">
-              Welcome Back
+              Sign In to Continue
             </h2>
             <p className="text-gray-600 text-sm">
-              Sign in to your GlideMiles account
+              Access your property dashboard and start earning more
             </p>
           </div>
           
@@ -63,23 +105,32 @@ export default function LoginPage() {
             </div>
 
             <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-colors duration-200" size="lg">
-              Continue
+              Access Dashboard
             </Button>
           </form>
 
           <div className="mt-4 pt-4 border-t border-gray-100">
             <p className="text-xs text-center text-gray-500">
-              By continuing, you agree to GlideMiles{' '}
+              By signing in, you agree to Glidemiles{' '}
               <a href="#" className="text-blue-600 hover:underline font-medium">Terms of Service</a>
               {' and '}
               <a href="#" className="text-blue-600 hover:underline font-medium">Privacy Policy</a>
             </p>
           </div>
+          
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600">
+              New to Glidemiles?{' '}
+              <a href="#" className="text-blue-600 hover:underline font-medium">
+                Join as a Partner
+              </a>
+            </p>
+          </div>
         </div>
         
         {/* Footer */}
-        <div className="text-center mt-4 text-xs text-gray-500">
-          <p>© 2024 GlideMiles Pvt. Ltd. All Rights Reserved.</p>
+        <div className="text-center mt-6 text-xs text-gray-500">
+          <p>© 2024 Glidemiles Pvt. Ltd. All Rights Reserved.</p>
         </div>
         </div>
       </div>
