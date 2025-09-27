@@ -58,10 +58,20 @@
 
 .tagline {
   color: white;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.025em;
+  text-align: center;
+}
+
+.brandName {
+  font-style: italic;
+  background: linear-gradient(135deg, #f4ff24, #f4ff24, #f4ff24);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
 }
 
 .features {
@@ -88,8 +98,8 @@
 }
 
 .featureIconSvg {
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   color: white;
 }
 
@@ -115,6 +125,11 @@
 
 .testimonial {
   margin-top: 2rem;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .testimonialQuote {

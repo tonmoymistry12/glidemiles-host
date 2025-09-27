@@ -71,7 +71,8 @@ export default function LoginPage() {
                 />
               </div>
               <h2 className={styles.tagline}>
-              Your Space, Their Stay – Grow with Glidemiles Holidays
+                Your Space, Their Stay – Grow with <br /> 
+                <span className={styles.brandName}>Glidemiles Holidays</span>
               </h2>
             </div>
 
