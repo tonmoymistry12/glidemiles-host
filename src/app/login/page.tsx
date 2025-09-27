@@ -71,7 +71,7 @@ export default function LoginPage() {
                 />
               </div>
               <h2 className={styles.tagline}>
-                Why Partner with Glidemiles?
+              Your Space, Their Stay – Grow with Glidemiles Holidays
               </h2>
             </div>
 

@@ -52,7 +52,7 @@ export default function ListingPage() {
           <h2 className="text-lg font-semibold text-gray-900 mb-4 text-center">Terms and Conditions</h2>
           
           <Card>
-            <div className="space-y-4">
+            <div className="space-y-4 p-6">
               <div className="flex items-start space-x-3">
                 <input 
                   type="checkbox" 
